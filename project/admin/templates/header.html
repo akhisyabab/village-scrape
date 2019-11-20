@@ -1,0 +1,66 @@
+<!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- Start Header Top Area -->
+    <div class="header-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="logo-area">
+                        <a href="#"><img src="{{ url_for('static',filename='img/logo/logo.png') }}" alt="" /></a>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                    <div class="header-top-menu">
+                        <ul class="nav navbar-nav notika-top-nav">
+                            <li class="nav-item dropdown">
+                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-search"></i></span></a>
+                                <div role="menu" class="dropdown-menu search-dd animated flipInX">
+                                    <div class="search-input">
+                                        <i class="notika-icon notika-left-arrow"></i>
+                                        <input type="text" />
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item"><a href="{{ url_for('admin.logout') }}" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-close"></i></span></a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Header Top Area -->
+    <!-- Mobile Menu start -->
+    <div class="mobile-menu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="mobile-menu">
+                        <nav id="dropdown">
+                            <ul class="mobile-menu-nav">
+                                <li><a href="{{ url_for('admin.dashboard') }}">Home</a></li>
+                                <li><a href="{{ url_for('admin.users') }}">User Data</a></li>
+                                <li><a href="{{ url_for('admin.datasources') }}">Data source</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu end -->
+    <!-- Main Menu area start-->
+    <div class="main-menu-area mg-tb-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
+                        <li><a href="{{ url_for('admin.dashboard') }}"><i class="notika-icon notika-house"></i> Home</a></li>
+                        <li><a href="{{ url_for('admin.users') }}"><i class="notika-icon notika-avable"></i> User Data</a></li>
+                        <li><a href="{{ url_for('admin.datasources') }}"><i class="notika-icon notika-windows"></i> Data source</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Menu area End-->

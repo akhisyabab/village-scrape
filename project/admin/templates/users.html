@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Users
+{% endblock %}
+
+
+{% block body %}
+    {% include 'header.html' %}
+    <!-- Breadcomb area Start-->
+	<div class="breadcomb-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="breadcomb-list">
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<div class="breadcomb-wp">
+									<div class="breadcomb-icon">
+										<i class="notika-icon notika-windows"></i>
+									</div>
+									<div class="breadcomb-ctn">
+										<h2>User Data</h2>
+										<a href="{{ url_for('admin.user_add') }}">Create</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Breadcomb area End-->
+
+    <!-- Data Table area Start-->
+    <div class="data-table-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="data-table-list">
+                        <div class="table-responsive">
+                            <table id="data-table-basic" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Username</th>
+                                        <th>Address</th>
+                                        <th>Date Registered</th>
+                                        <th>Role</th>
+                                        <th>Nama bank</th>
+                                        <th>Nomor rekening</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for user in users %}
+                                    <tr class="odd gradeX">
+                                        <td>{{ user.username }}</td>
+                                        <td>{{ user.address }}</td>
+                                        <td>{{ user.register_on }}</td>
+                                        <td>{{ user.role }}</td>
+                                        <td>{{ user.bank_name }}</td>
+                                        <td>{{ user.bank_number }}</td>
+                                        <td>
+                                            <a href="{{ url_for('admin.user_delete', user_id=user.id) }}">Delete</a>
+                                            ||
+                                            <a href="{{ url_for('admin.user_edit', user_id=user.id) }}">Edit</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Data Table area End-->
+    {% include 'footer.html' %}
+{% endblock %}

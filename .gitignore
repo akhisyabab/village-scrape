@@ -1,0 +1,6 @@
+__pycache__
+env
+htmlcov
+.idea/
+venv
+services/engine/project/static/images/qr_code/

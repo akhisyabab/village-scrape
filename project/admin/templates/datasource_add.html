@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% from "_form_macros.html" import render_field %}
+
+{% block title %}
+    Datasource Add
+{% endblock %}
+
+{% block body %}
+    {% include 'header.html' %}
+    {% include 'allert_message.html' %}
+
+    <!-- Breadcomb area Start-->
+	<div class="breadcomb-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="breadcomb-list">
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<div class="breadcomb-wp">
+									<div class="breadcomb-icon">
+										<i class="notika-icon notika-windows"></i>
+									</div>
+									</div>
+									<div class="breadcomb-ctn">
+										<h2>Datasource</h2>
+										<a href="{{ url_for('admin.datasource_add') }}">Create</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Breadcomb area End-->
+
+
+    <div class="container">
+         <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-example-wrap">
+                        <form action="{{ url_for('admin.datasource_add') }}" method="post">
+                            <div class="form-example-int">
+                                <div class="form-group">
+                                    <label>Site name</label>
+                                    <div class="nk-int-st">
+                                        <input type="text" class="form-control input-sm" placeholder="Site name"  name="site_name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-example-int mg-t-15">
+                                <div class="form-group">
+                                    <label>Site URL</label>
+                                    <div class="nk-int-st">
+                                        <input type="text" class="form-control input-sm" placeholder="Site URL"  name="site_url">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-example-int mg-t-15">
+                                <button class="btn btn-success notika-btn-success">Add</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    {% include 'footer.html' %}
+{% endblock %}

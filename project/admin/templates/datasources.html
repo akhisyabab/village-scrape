@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Data sources
+{% endblock %}
+
+
+{% block body %}
+    {% include 'header.html' %}
+    <!-- Breadcomb area Start-->
+	<div class="breadcomb-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="breadcomb-list">
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<div class="breadcomb-wp">
+									<div class="breadcomb-icon">
+										<i class="notika-icon notika-windows"></i>
+									</div>
+									<div class="breadcomb-ctn">
+										<h2>Data sources</h2>
+										<a href="{{ url_for('admin.datasource_add') }}">Create</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Breadcomb area End-->
+
+    <!-- Data Table area Start-->
+    <div class="data-table-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="data-table-list">
+                        <div class="table-responsive">
+                            <table id="data-table-basic" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Site name</th>
+                                        <th>Site URL</th>
+                                         <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for source in datasources %}
+                                    <tr class="odd gradeX">
+                                        <td>{{ source.site_name }}</td>
+                                        <td>{{ source.site_url }}</td>
+                                        <td>
+                                            <a href="{{ url_for('admin.datasource_delete', datasource_id=source.id) }}">Delete</a>
+                                            ||
+                                            <a href="{{ url_for('admin.datasource_edit', datasource_id=source.id) }}">Edit</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Data Table area End-->
+    {% include 'footer.html' %}
+{% endblock %}

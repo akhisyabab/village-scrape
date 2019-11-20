@@ -1,0 +1,40 @@
+version: '3.6'
+
+services:
+
+  engine:
+    container_name: 'village-scraper-app'
+    build:
+      context: ./
+      dockerfile: Dockerfile-prod
+    expose:
+      - 5000
+    environment:
+      - FLASK_ENV=production
+      - APP_SETTINGS=project.config.ProductionConfig
+      - DATABASE_URL=postgres://villagescrapeuserprod:villagescrapepasswordprod@engine-db:5432/village_scrape_prod
+      - DATABASE_TEST_URL=postgres://villagescrapeuserprod:villagescrapepasswordprod@engine-db:5432/village_scrape_test
+    depends_on:
+      - engine-db
+
+  engine-db:
+    container_name: 'village-scraper-db'
+    build:
+      context: services/db
+      dockerfile: Dockerfile-prod
+    ports:
+      - 5435:5432
+    environment:
+      - POSTGRES_USER=villagescrapeuserprod
+      - POSTGRES_PASSWORD=villagescrapepasswordprod
+
+  nginx:
+    container_name: 'village-scraper-nginx'
+    build:
+      context: ./services/nginx
+      dockerfile: Dockerfile-prod
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - engine

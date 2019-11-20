@@ -1,0 +1,7 @@
+# rename this file to .dockergitignore if needed
+
+env
+.dockerignore
+Dockerfile-dev
+Dockerfile-prod
+htmlcov

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+% from "_form_macros.html" import render_field %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block body %}
+{% include 'allert_message.html' %}
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- Login Register area Start-->
+    <div class="login-content">
+        <!-- Login -->
+            <div class="nk-block toggled" id="l-login">
+                <div class="nk-form">
+                    <form action="{{ url_for('admin.login') }}" method="post">
+                        <div class="input-group">
+                            <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
+                            <div class="nk-int-st">
+                                <input type="text" class="form-control" placeholder="Username" name="username">
+                            </div>
+                        </div>
+                        <div class="input-group mg-t-15">
+                            <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-edit"></i></span>
+                            <div class="nk-int-st">
+                                <input type="password" class="form-control" placeholder="Password" name="password">
+                            </div>
+                        </div>
+                        <div class="fm-checkbox">
+                            <label><input type="checkbox" class="i-checks"> <i></i> Keep me signed in</label>
+                        </div>
+                        <button class="btn btn-success notika-btn-success waves-effect">Submit</button>
+                    </form>
+                </div>
+            </div>
+    </div>
+    <!-- Login Register area End-->
+{% endblock %}
