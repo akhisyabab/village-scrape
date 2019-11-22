@@ -9,8 +9,8 @@ from project.models.models import ReportSource
 
 scraper_blueprint = Blueprint('scraper', __name__, template_folder='templates')
 
-class NomornetScraper:
-    source_name = 'nomornet'
+class Nomornet2Scraper:
+    source_name = 'nomornet2'
     reports = []
 
     @staticmethod

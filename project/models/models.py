@@ -104,6 +104,52 @@ class Datasource(db.Model):
             'site_url': self.site_url
         }
 
+class ReportSource(db.Model):
+    __tablename__ = 'reportsource'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    data_source = db.Column(db.String(128), nullable=True)
+    kode_pos = db.Column(db.String(128), nullable=True)
+    desa = db.Column(db.String(128), nullable=True )
+    kode = db.Column(db.String(128), nullable=True)
+    kecamatan = db.Column(db.String(128), nullable=True)
+    dt2 = db.Column(db.String(128), nullable=True)
+    kota = db.Column(db.String(128), nullable=True)
+    provinsi = db.Column(db.String(128), nullable=True)
+
+    def __init__(self, data_source, kode_pos, desa, kode, kecamatan, dt2, kota, provinsi):
+        self.data_source = data_source
+        self.kode_pos = kode_pos
+        self.desa = desa
+        self.kode = kode
+        self.kecamatan = kecamatan
+        self.dt2 = dt2
+        self.kota = kota
+        self.provinsi = provinsi
+
+    @classmethod
+    def find_by_desa(cls, data_source, desa, kecamatan, kota):
+        return cls.query.filter_by(data_source=data_source, desa=desa, kecamatan=kecamatan, kota=kota).first()
+
+    @classmethod
+    def find_by_id(cls, id):
+        return cls.query.filter_by(id=id).first()
+
+    def __repr__(self):
+        return '<title {}'.format(self.desa)
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'kode_pos': self.kode_pos,
+            'desa': self.desa,
+            'kode': self.kode,
+            'kecamatan': self.kecamatan,
+            'dt2': self.dt2,
+            'kota': self.kota,
+            'provinsi': self.provinsi
+        }
+
 
 class RevokedToken(db.Model):
     __tablename__ = 'revoked_tokens'
