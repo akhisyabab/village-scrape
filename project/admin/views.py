@@ -1,8 +1,11 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+import csv
+
+from flask import Blueprint, render_template, request, flash, redirect, url_for, send_from_directory, send_file
 from flask_login import login_user, current_user, login_required, logout_user
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.sql import text
 
-from project.models.models import User, Datasource
+from project.models.models import User, Datasource, ReportSource
 from project import db
 
 
@@ -19,10 +22,7 @@ def login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        current_user = User.find_by_username(username)
-        if not current_user:
-            flash('ERROR! user not found.', 'error')
-            return redirect(url_for('admin.dashboard'))
+
 
         if User.verify_hash(password, current_user.password):
             current_user.authenticated = True
@@ -177,4 +177,40 @@ def datasource_edit(datasource_id):
             flash('ERROR!')
 
     return render_template('datasource_edit.html', datasource=datasource)
+
+# Report Source ####################################################
+@admin_blueprint.route('/admin/reportsource')
+# @login_required
+def reportsources():
+    allreport = ReportSource.query.all()
+    return render_template('reportsources.html', reportsources=allreport)
+
+@admin_blueprint.route('/admin/export_reportsources')
+def export_reportsources():
+    # Use this format if using pandas
+    # Cars = {'Brand': ['Honda Civic', 'Toyota Corolla', 'Ford Focus', 'Audi A4'],
+    #         'Price': [22000, 25000, 27000, 35000]
+    #         }
+    # df = DataFrame(datas, columns=datas.keys())
+    # df.to_csv('data_desa.csv', index=None, header=True)
+
+    all_report = db.session.execute(text(
+        'SELECT kode_pos, desa, kode, kecamatan, dt2, kota, provinsi FROM reportsource'
+    ))
+    c = csv.writer(open('project/static/file/report.csv', 'w+'))
+    c.writerow(['kode_pos', 'desa', 'kode', 'kecamatan', 'dt2', 'kota', 'provinsi'])
+    for x in all_report:
+        c.writerow(x)
+
+    return redirect('/file/report.csv')
+
+
+@admin_blueprint.route('/admin/reportsource_delete/<reportsource_id>')
+# @login_required
+def reportsource_delete(reportsource_id):
+    reportsource = ReportSource.find_by_id(reportsource_id)
+    db.session.delete(reportsource)
+    db.session.commit()
+    return redirect(url_for('admin.reportsources'))
+
 

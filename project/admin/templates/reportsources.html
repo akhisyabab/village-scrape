@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Data sources
+    Report sources
 {% endblock %}
 
 
@@ -20,8 +20,10 @@
 										<i class="notika-icon notika-windows"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Data sources</h2>
-										<a href="{{ url_for('admin.datasource_add') }}">Create</a>
+										<h2>Report sources</h2>
+                                        <i>Data founds:  {{ reportsources|length }}</i> ||
+<!--                                        <a href="{{ url_for('static',filename='file/report.csv') }}" download>Download csv</a>-->
+                                            <a href="{{ url_for('admin.export_reportsources') }}" download>Download csv</a>
 									</div>
 								</div>
 							</div>
@@ -43,22 +45,30 @@
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Site name</th>
-                                        <th>Site URL</th>
-                                         <th>Action</th>
+                                        <th>Data sources</th>
+                                        <th>Kode pos</th>
+                                        <th>Desa / Kelurahan</th>
+                                        <th>Kode wilayah</th>
+                                        <th>Kecamatan / Distrik</th>
+                                        <th>DT2</th>
+                                        <th>Kabupaten / Kota</th>
+                                        <th>Provinsi</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for source in datasources %}
+                                    {% for report in reportsources %}
                                     <tr class="odd gradeX">
-                                        <td>{{ source.site_name }}</td>
-                                        <td>{{ source.site_url }}</td>
+                                        <td>{{ report.data_source }}</td>
+                                        <td>{{ report.kode_pos }}</td>
+                                        <td>{{ report.desa }}</td>
+                                        <td>{{ report.kode }}</td>
+                                        <td>{{ report.kecamatan }}</td>
+                                        <td>{{ report.dt2 }}</td>
+                                        <td>{{ report.kota }}</td>
+                                        <td>{{ report.provinsi }}</td>
                                         <td>
-                                            <a href="{{ url_for('admin.datasource_delete', datasource_id=source.id) }}">Delete</a>
-                                            ||
-                                            <a href="{{ url_for('admin.datasource_edit', datasource_id=source.id) }}">Edit</a>
-                                            ||
-                                            <a href="{{ url_for('scraper.fetch', fetcher=source.site_name) }}" target="_blank">Fetch</a>
+                                            <a href="{{ url_for('admin.reportsource_delete', reportsource_id=report.id) }}">Delete</a>
                                         </td>
                                     </tr>
                                     {% endfor %}
