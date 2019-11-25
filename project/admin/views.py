@@ -103,12 +103,12 @@ def user_edit(user_id):
     if request.method == 'POST':
         try:
             is_admin = request.form.get('is-admin')
-            password = request.form.get('password')
+            # password = request.form.get('password')
 
             user.username = request.form.get('username')
-            user.password = User.generate_hash(password)
-            if User.verify_hash(password, current_user.password):
-                user.password = password
+            # user.password = User.generate_hash(password)
+            # if User.verify_hash(password, current_user.password):
+            #     user.password = password
 
             user.address = request.form.get('address')
             if is_admin:
